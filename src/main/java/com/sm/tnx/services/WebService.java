@@ -19,7 +19,7 @@ public class WebService {
 	private final EmployeeRepository employeeRepository;
 	private final AddressRepository addressRepository;
 
-	//No transactional implemeted
+	@Transactional(propagation = Propagation.REQUIRED)
 	public Employee saveEmployee(EmployeDto employeeDto) {		
 		Employee employee=saveEmployeeToDb(employeeDto);//save data in employee table
 		saveAddressToDb(employeeDto);//save data in address table		
