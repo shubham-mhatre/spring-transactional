@@ -27,6 +27,10 @@ deafault propagation : **Propagation.REQUIRED** means that if transaction alread
 
 ![image](https://github.com/user-attachments/assets/9d309c62-0aea-4a8f-a3a7-8a3c2b837d17)
 
+![image](https://github.com/user-attachments/assets/4637f99f-484e-4871-b532-8a1f181cf963)
+
+
 no data present **in both the table, as it gets rolled back.**
+
 ![image](https://github.com/user-attachments/assets/312e6db3-eb5b-420c-9c94-d21d361e4d8e)
 
