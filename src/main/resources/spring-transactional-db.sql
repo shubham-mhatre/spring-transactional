@@ -24,3 +24,13 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `number` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `api_call_audit_log` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`remark` VARCHAR(50) NULL DEFAULT NULL,
+	`status` VARCHAR(50) NULL DEFAULT NULL,
+	PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+;
+

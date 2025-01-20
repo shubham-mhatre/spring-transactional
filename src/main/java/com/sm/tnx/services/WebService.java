@@ -18,14 +18,22 @@ public class WebService {
 	
 	private final EmployeeRepository employeeRepository;
 	private final AddressRepository addressRepository;
+	private final AuditService auditService;
 
 	@Transactional(propagation = Propagation.REQUIRED)
-	public Employee saveEmployee(EmployeDto employeeDto) {		
-		Employee employee=saveEmployeeToDb(employeeDto);//save data in employee table
-		saveAddressToDb(employeeDto);//save data in address table		
+	public Employee saveEmployee(EmployeDto employeeDto) {
+		Employee employee = null;
+		try {
+			employee=saveEmployeeToDb(employeeDto);//save data in employee table
+			saveAddressToDb(employeeDto);//save data in address table
+			auditService.saveInAuditTable("employee data saved. Employee id : " + employee.getEmpId(),"success");
+		}catch(Exception e) {
+			System.out.println("exception occured : save in audit log as failed status");
+			auditService.saveInAuditTable("employee not data saved. exception occured" + e.getMessage(),"failed");
+		}		
 		return employee;		
-	}
-	
+	}	
+
 	//save data in employee table
 	private Employee saveEmployeeToDb(EmployeDto employeeDto) {
 		Employee employee = Employee.builder().email(employeeDto.getEmail()).gender(employeeDto.getGender())
@@ -39,5 +47,4 @@ public class WebService {
 				.city(employeeDto.getCity()).state(employeeDto.getState()).build();		
 		addressRepository.save(address);		
 	}
-
 }
