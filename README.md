@@ -34,3 +34,29 @@ no data present **in both the table, as it gets rolled back.**
 
 ![image](https://github.com/user-attachments/assets/312e6db3-eb5b-420c-9c94-d21d361e4d8e)
 
+**case 3 : with transactional (Propagation Required_NEW)**
+
+we have a requirement that, **we need to save log of request in audit table, be it success case or exception case.**
+In webservice, **saveEmployee() method have propagation.REQUIRED**, this is alway use existing transaction if exists.
+so We create **AuditService in that saveInAuditTable() method will have propagation.REQUIRED_NEW** , which will always **create new transaction**.
+so in exception case, **saveEmployee() transaction will get rolled back properly** and it's failure log will get stored in audit table with new **transaction as propagation.REQUIRED_NEW**
+
+![image](https://github.com/user-attachments/assets/58d50b7e-a235-42dc-9c73-097c56fa6328)
+
+modify webService
+
+![image](https://github.com/user-attachments/assets/18efb623-23fe-440d-b92d-9ab4b90d564c)
+
+created auditService
+
+![image](https://github.com/user-attachments/assets/250d6962-361c-450c-ae38-3774bb25d296)
+
+
+transactions Logs
+
+![image](https://github.com/user-attachments/assets/e503894d-913e-4974-ab28-bc636f9c872b)
+
+**in db, in case of exception, employee & address table data gets rolled back & in audit table there is a log entry**
+
+![image](https://github.com/user-attachments/assets/679ce3c9-0581-4cf8-946a-163557003ea5)
+
