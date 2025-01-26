@@ -91,3 +91,15 @@ requirement is send notification to user, that can be done outside of transactio
 ![image](https://github.com/user-attachments/assets/b5643130-c34d-4539-bc9c-b66ea61fd6ac)
 
 
+**Case 6 : with transactional (propagation NOT SUPPORTED)**
+when transaction is not required and even if found then don't throw any exception, just suspend it and proceed.
+requirement is send recommendations to employee to take further steps after onboarding, that can be perform using transaction not support propagation
+
+![image](https://github.com/user-attachments/assets/22d22443-9819-4810-9c69-ac5fe05ab865)
+
+
+![image](https://github.com/user-attachments/assets/7a13b520-b046-4069-85d3-696b162af23f)
+
+![image](https://github.com/user-attachments/assets/b5e07648-899b-4dd3-9060-d64856e75365)
+
+
