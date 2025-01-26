@@ -20,7 +20,29 @@ public class WebService {
 	private final AddressRepository addressRepository;
 	private final AuditService auditService;
 	private final UserIdentityService identityService;
+	private final NotificationService notificationService;
 
+	
+	/**
+	 * implemented like this, coz we need to call propagation never method outside of transaction
+	 * 1st step, save Employee in db
+	 * 
+	 * 2nd step, send notification to employee
+	 */
+	public Employee onboardEmployee(EmployeDto employeeDto) {
+		Employee employee=saveEmployee(employeeDto);//propagation required		
+		sendNotification();//propagation never
+		return employee;
+	}
+	
+	/**
+	 * create required propagation transaction
+	 * save in employee table with.
+	 * save in address table
+	 * 
+	 * create required_new propagation transaction to save in audit log table
+	 * create mandatory propagation to save in identitylog table. //comment it when testing for never propagation, implemented as part of notification
+	 */
 	@Transactional(propagation = Propagation.REQUIRED)
 	public Employee saveEmployee(EmployeDto employeeDto) {
 		Employee employee = null;
@@ -33,7 +55,7 @@ public class WebService {
 			auditService.saveInAuditTable("employee not data saved. exception occured" + e.getMessage(),"failed");
 		}
 		
-		identityService.validateUserIdentityProofs(employee.getEmpId());
+		//identityService.validateUserIdentityProofs(employee.getEmpId());//madatory propagation
 		return employee;		
 	}	
 
@@ -49,5 +71,10 @@ public class WebService {
 		Address address =Address.builder().addr1(employeeDto.getAddr1()).addr2(employeeDto.getAddr2())
 				.city(employeeDto.getCity()).state(employeeDto.getState()).build();		
 		addressRepository.save(address);		
+	}
+	
+	//Propagation never
+	public void sendNotification() {
+		notificationService.sendNotification();		
 	}
 }
