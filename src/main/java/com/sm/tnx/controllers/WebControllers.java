@@ -18,7 +18,7 @@ public class WebControllers {
 
 	@PostMapping(value="/saveEmployee")
 	public Employee saveEmployee(@RequestBody EmployeDto employeeDto) {
-		Employee employee= webService.onboardEmployee(employeeDto);
+		Employee employee= webService.saveEmployee(employeeDto);
 		return employee;
 	}
 }

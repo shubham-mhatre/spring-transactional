@@ -21,9 +21,10 @@ public class WebService {
 	private final AuditService auditService;
 	private final UserIdentityService identityService;
 	private final NotificationService notificationService;
+	private final RecommendationService recommendationService;
 
 	
-	/**
+	/** use this method while testing propagation never.
 	 * implemented like this, coz we need to call propagation never method outside of transaction
 	 * 1st step, save Employee in db
 	 * 
@@ -31,7 +32,8 @@ public class WebService {
 	 */
 	public Employee onboardEmployee(EmployeDto employeeDto) {
 		Employee employee=saveEmployee(employeeDto);//propagation required		
-		sendNotification();//propagation never
+		sendNotification();//propagation never		
+		
 		return employee;
 	}
 	
@@ -42,6 +44,8 @@ public class WebService {
 	 * 
 	 * create required_new propagation transaction to save in audit log table
 	 * create mandatory propagation to save in identitylog table. //comment it when testing for never propagation, implemented as part of notification
+	 * create not supported propagation to send recommendation
+	 * 
 	 */
 	@Transactional(propagation = Propagation.REQUIRED)
 	public Employee saveEmployee(EmployeDto employeeDto) {
@@ -56,6 +60,7 @@ public class WebService {
 		}
 		
 		//identityService.validateUserIdentityProofs(employee.getEmpId());//madatory propagation
+		recommendationService.getRecommendations();//propagation NOT supported
 		return employee;		
 	}	
 
