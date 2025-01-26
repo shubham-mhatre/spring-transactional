@@ -102,4 +102,7 @@ requirement is send recommendations to employee to take further steps after onbo
 
 ![image](https://github.com/user-attachments/assets/b5e07648-899b-4dd3-9060-d64856e75365)
 
+![image](https://github.com/user-attachments/assets/2e91fa8b-8ef2-4c1b-85da-562a2cf0be2e)
+
+
 
