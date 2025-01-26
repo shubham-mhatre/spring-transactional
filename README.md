@@ -77,3 +77,17 @@ in that case we can go for propagation mandatory for userIdentityService
 
 ![image](https://github.com/user-attachments/assets/6f5c6db0-26f1-4fe6-b61f-06383b6fb026)
 
+
+**case 5 : with transactional (propagation NEVER)**
+propagation never should always be executed outside of transaction, if it method marked with propagation never called from existing transaction it will throw exception.
+requirement is send notification to user, that can be done outside of transaction. so use progation never
+
+![image](https://github.com/user-attachments/assets/9e5a37ba-93b2-4443-beac-e761cc8fa99e)
+
+
+![image](https://github.com/user-attachments/assets/e1755fd2-ae95-48e0-b798-f6d3439b7a35)
+
+
+![image](https://github.com/user-attachments/assets/b5643130-c34d-4539-bc9c-b66ea61fd6ac)
+
+
