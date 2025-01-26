@@ -60,3 +60,20 @@ transactions Logs
 
 ![image](https://github.com/user-attachments/assets/679ce3c9-0581-4cf8-946a-163557003ea5)
 
+
+
+**Case 4 : with transactional (Propagation Mandatory)**
+we have requirement that we need to validate user proofs, but **we need to use current transaction only** & **failure in validating proof should not affect original save user details transaction**
+in that case we can go for propagation mandatory for userIdentityService
+
+
+![image](https://github.com/user-attachments/assets/974ab306-8526-4ddd-bc13-14d18538265c)
+
+
+**identityLogService**
+![image](https://github.com/user-attachments/assets/a2bec5cd-0931-4486-b04e-2d972afe47e0)
+
+
+
+![image](https://github.com/user-attachments/assets/6f5c6db0-26f1-4fe6-b61f-06383b6fb026)
+
