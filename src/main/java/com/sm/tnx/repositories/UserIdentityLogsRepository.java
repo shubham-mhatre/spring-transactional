@@ -3,9 +3,9 @@ package com.sm.tnx.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.sm.tnx.entity.Employee;
+import com.sm.tnx.entity.UserIdentityLogs;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+public interface UserIdentityLogsRepository extends JpaRepository<UserIdentityLogs, Integer> {
 
 }

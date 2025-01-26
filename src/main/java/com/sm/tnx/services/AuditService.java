@@ -19,7 +19,9 @@ public class AuditService {
 	//so we want to create new transaction every time for audit log , so used Propagation.REQUIRES_NEW
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public void saveInAuditTable(String remark, String status) {
-		AuditLog audit =  AuditLog.builder().remark(remark.substring(0, 250)).status(status).build();
+		AuditLog audit =  AuditLog.builder()
+				.remark(remark.length() > 250 ? remark.substring(0, 250) : remark)
+				.status(status).build();
 		auditLogRepository.save(audit);		
 	}
 }

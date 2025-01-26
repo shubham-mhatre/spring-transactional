@@ -34,3 +34,13 @@ CREATE TABLE `api_call_audit_log` (
 ENGINE=InnoDB
 ;
 
+CREATE TABLE `user_identity_logs` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`remark` VARCHAR(50) NULL DEFAULT NULL,
+	`status` VARCHAR(50) NULL DEFAULT NULL,
+	`userId` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`id`)
+)
+ENGINE=InnoDB
+;
+

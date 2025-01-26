@@ -19,6 +19,7 @@ public class WebService {
 	private final EmployeeRepository employeeRepository;
 	private final AddressRepository addressRepository;
 	private final AuditService auditService;
+	private final UserIdentityService identityService;
 
 	@Transactional(propagation = Propagation.REQUIRED)
 	public Employee saveEmployee(EmployeDto employeeDto) {
@@ -30,7 +31,9 @@ public class WebService {
 		}catch(Exception e) {
 			System.out.println("exception occured : save in audit log as failed status");
 			auditService.saveInAuditTable("employee not data saved. exception occured" + e.getMessage(),"failed");
-		}		
+		}
+		
+		identityService.validateUserIdentityProofs(employee.getEmpId());
 		return employee;		
 	}	
 
